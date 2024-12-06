@@ -20,9 +20,6 @@ export function userFactoryWorker(
   const email = faker.internet.email({ firstName, lastName });
   const userName = faker.internet.userName({ firstName, lastName });
   const random = Math.random().toString(36).substring(7);
-  const organizationId = buildOptions.organizationId;
-  const organizationMember = buildOptions.member ?? false;
-  const organizationAdmin = buildOptions.admin ?? false;
   return {
     firstName,
     lastName,
@@ -38,11 +35,6 @@ export function userFactoryWorker(
     regId: generateRegId(),
     locale: generateLocale(),
     pictureUrl: faker.image.avatar(),
-    organizationId,
-    joinedOrganizationAt: organizationId ? faker.date.recent() : null,
-    organizationAdmin: organizationAdmin,
-    requestedToJoinOrganization: organizationMember || organizationAdmin,
-    acceptedInOrganization: organizationMember || organizationAdmin,
     linkId: randomUUID(),
     bbId: randomUUID(),
     bbEncrypted: generateBbEncrypted(),

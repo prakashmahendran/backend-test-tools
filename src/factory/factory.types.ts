@@ -1,8 +1,6 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import {
   ConnectionModel,
   ConnectionBuildOptions,
-  OrganizationModel,
   UserModel,
   UserBuildOptions,
 } from './workers';
@@ -14,13 +12,6 @@ type FactoryTyping = {
     options: ConnectionBuildOptions;
     /** Return type for the connection model */
     return: ConnectionModel;
-  };
-  /** Mapping for the organization model */
-  organization: {
-    /** Options for the organization model */
-    options: any;
-    /** Return type for the organization model */
-    return: OrganizationModel;
   };
   /** Mapping for the user model */
   user: {

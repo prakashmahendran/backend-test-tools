@@ -1,4 +1,4 @@
-import {PushNotification} from '@gwcdata/node-server-engine';
+import {PushNotification} from 'node-server-engine';
 import {stub} from 'sinon';
 import {PushNotificationStub} from './PushNotification.types';
 

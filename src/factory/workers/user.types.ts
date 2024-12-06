@@ -28,16 +28,6 @@ export interface UserModel {
   locale: string;
   /** URL opf the user's avatar */
   pictureUrl: string;
-  /** @deprecated ID of the user's organization */
-  organizationId?: string;
-  /** @deprecated Date at which the user joined the organization */
-  joinedOrganizationAt?: Date | null;
-  /** @deprecated Admin status of the user in the organization */
-  organizationAdmin: boolean;
-  /** @deprecated */
-  requestedToJoinOrganization: boolean;
-  /** @deprecated */
-  acceptedInOrganization: boolean;
   /** User's ID for QR codes */
   linkId: string;
   /** User's BlackBerry ID */
@@ -66,8 +56,6 @@ export interface UserBuildOptions {
   firstName?: string;
   /** User's last name */
   lastName?: string;
-  /** Id of the organization to which the user is affiliated */
-  organizationId?: string;
   /** Admin status of the user in his organization */
   admin?: boolean;
   /** Membership status of the user in his organization */

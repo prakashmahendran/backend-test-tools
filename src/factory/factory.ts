@@ -6,11 +6,10 @@ import {
   FactoryReturnType,
   ModelsMap,
 } from './factory.types';
-import {connectionFactoryWorker, organizationFactoryWorker, userFactoryWorker} from './workers';
+import {connectionFactoryWorker, userFactoryWorker} from './workers';
 
 const modelsMap: ModelsMap = {
   connection: connectionFactoryWorker,
-  organization: organizationFactoryWorker,
   user: userFactoryWorker,
 };
 

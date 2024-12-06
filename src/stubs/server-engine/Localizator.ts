@@ -1,4 +1,4 @@
-import {Localizator} from '@gwcdata/node-server-engine/dist/entities/Localizator/Localizator';
+import {Localizator} from 'node-server-engine/dist/entities/Localizator/Localizator';
 import {stub} from 'sinon';
 import {LocalizatorStub, LocalizatorStubOptions} from './Localizator.types';
 

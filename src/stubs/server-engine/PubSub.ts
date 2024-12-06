@@ -1,4 +1,4 @@
-import {PubSub} from '@gwcdata/node-server-engine';
+import {PubSub} from 'node-server-engine';
 import {stub} from 'sinon';
 import {PubSubStub} from './PubSub.types';
 

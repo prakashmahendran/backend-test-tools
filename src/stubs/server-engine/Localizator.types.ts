@@ -1,4 +1,4 @@
-import {LocalizatorLocalizationDataElement} from '@gwcdata/node-server-engine';
+import {LocalizatorLocalizationDataElement} from 'node-server-engine';
 import {SinonStub} from 'sinon';
 
 /** Stubbing options for the Localizator */
