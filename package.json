@@ -1,6 +1,6 @@
 {
   "name": "backend-test-tools",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Node test tools",
   "main": "dist/index.js",
   "scripts": {
@@ -78,6 +78,6 @@
     "supertest": "^4.0.2"
   },
   "peerDependencies": {
-    "node-server-engine": "^1.0.5"
+    "node-server-engine": "^1.0.6"
   }
 }
