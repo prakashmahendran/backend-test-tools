@@ -1,6 +1,6 @@
 import fs from 'fs';
-import {agent, Request} from 'supertest';
-import {tlsRequestOptions} from './tlsRequest.types';
+import { agent, Agent } from 'supertest';  // Import Agent type
+import { tlsRequestOptions } from './tlsRequest.types';
 
 const customAgent = agent(`https://localhost:${process.env.PORT as string}`);
 
@@ -9,12 +9,16 @@ let settings: tlsRequestOptions;
 /**
  * Wrapper for supertest that adds TLS encryption
  */
-export async function tlsRequest(options: tlsRequestOptions = {}): Promise<Request> {
+export async function tlsRequest(options: tlsRequestOptions = {}): Promise<Agent> {
   if (!settings) loadDefaultSettings();
+  
   const ca = options.ca ? fs.readFileSync(options.ca, 'utf-8') : settings.ca;
   const key = options.key ? fs.readFileSync(options.key, 'utf-8') : settings.key;
   const cert = options.cert ? fs.readFileSync(options.cert, 'utf-8') : settings.cert;
+
   if (!ca || !key || !cert) throw new Error('Missing some TLS configuration');
+
+  // Return Agent with configured TLS options
   return customAgent.ca(ca).key(key).cert(cert);
 }
 

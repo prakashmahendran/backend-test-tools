@@ -1,19 +1,30 @@
-import Jimp from 'jimp';
-import {generateImageBufferOptions} from './generateImageBuffer.types';
+import sharp from 'sharp';
 
-/** Generate a binary buffer containing a PNG image */
-export async function generateImageBuffer(
-  options: generateImageBufferOptions = {},
+/** Generate a random image buffer */
+export async function generateRandomImageBuffer(
+  width: number = 150,
+  height: number = 150
 ): Promise<Buffer> {
-  const image = await generateImage(options);
-  return image.getBufferAsync(Jimp.MIME_PNG);
-}
+  // Create a blank image buffer
+  const buffer = Buffer.alloc(width * height * 3); // RGB buffer (no alpha channel)
 
-/** Generate the asynchronously image using Jimp */
-async function generateImage(options: generateImageBufferOptions = {}): Promise<Jimp> {
-  return new Promise<Jimp>((resolve) => {
-    new Jimp(options.width ?? 150, options.height ?? 150, function (err, image) {
-      resolve(image);
-    });
-  });
+  // Fill the buffer with random colors
+  for (let i = 0; i < buffer.length; i += 3) {
+    buffer[i] = Math.floor(Math.random() * 256);     // Red
+    buffer[i + 1] = Math.floor(Math.random() * 256); // Green
+    buffer[i + 2] = Math.floor(Math.random() * 256); // Blue
+  }
+
+  // Use sharp to create an image from the buffer and convert it to PNG
+  const imageBuffer = await sharp(buffer, {
+    raw: {
+      width: width,
+      height: height,
+      channels: 3 // RGB
+    }
+  })
+    .toFormat('png') // Convert to PNG format
+    .toBuffer(); // Return the image buffer
+
+  return imageBuffer;
 }
