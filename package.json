@@ -1,6 +1,6 @@
 {
   "name": "backend-test-tools",
-  "version": "1.0.4",
+  "version": "1.0.6",
   "description": "Node test tools",
   "main": "dist/index.js",
   "scripts": {
@@ -15,7 +15,7 @@
     "url": "git+https://github.com/prakashmahendran/backend-test-tools.git"
   },
   "author": "Ram",
-  "license": "UNLICENSED",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/prakashmahendran/backend-test-tools/issues"
   },

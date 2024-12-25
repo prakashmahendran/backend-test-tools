@@ -10,9 +10,7 @@ Tools to be used by the Node backend services for testing purpose.
     - [Access token](#access-token)
     - [Social provider](#social-provider)
     - [Auth0 ID](#auth0-id)
-    - [Chat ID](#chat-id)
     - [Locale](#locale)
-    - [RegId](#regid)
     - [RSA Key Pair](#rsa-key-pair)
     - [User public key](#user-public-key)
     - [User encrypted private key](#user-encrypted-private-key)
@@ -20,9 +18,6 @@ Tools to be used by the Node backend services for testing purpose.
   - [Factory](#factory)
     - [Build](#build)
     - [Models](#models)
-      - [Connection](#connection)
-      - [Identity](#identity)
-      - [Organization](#organization)
       - [User](#user)
   - [Utilities](#utilities)
     - [TLS](#tls)
@@ -71,15 +66,6 @@ const auth0Id = generateAuth0UserId(full)
 
 - **full** (Boolean): prefix the provider name to the ID to create a full auth0 ID also known as externalID. (default: false)
 
-### Chat ID
-
-Get a random BlackBerry Spark chat ID
-
-```javascript
-import {generateChatId} from 'backend-test-tools'
-const chatId = generateChatId()
-```
-
 ### Locale
 
 Get a random locale from the ones available.
@@ -87,15 +73,6 @@ Get a random locale from the ones available.
 ```javascript
 import {generateLocale} from 'backend-test-tools'
 const locale = generateLocale()
-```
-
-### RegId
-
-Get a random Blackberry Spark regId.
-
-```javascript
-import {generateRegId} from 'backend-test-tools'
-const regId = generateRegId()
 ```
 
 ### RSA Key Pair
@@ -182,13 +159,6 @@ import {factory} from 'backend-test-tools'
 const model = factory.build('identity')
 ```
 
-#### Organization
-
-```javascript
-import {factory} from 'backend-test-tools'
-const model = factory.build('organization')
-```
-
 #### User
 
 ```javascript
@@ -196,8 +166,6 @@ import {factory} from 'backend-test-tools'
 const buildOptions = {
  firstName: John,
  lastName: Doe,
- organizationId: '51f0ac7a-4b79-485f-9a0f-a0eb7a5d8aa8',
- admin: false,
  member: false,
  moreRandom: false
 }
@@ -206,8 +174,6 @@ const model = factory.build('user', undefined, buildOptions)
 
 - **firstName**: First name of the user, will also define all the variations of name.
 - **lastName**: Last name of the user, will also define all the variations of name.
-- **organizationId**: Id of the organization to which the user is related. Will define the date at which he joined.
-- **admin**: User is admin of the organization.
 - **member**: User is a member of the organization.
 - **moreRandom**: Adds randomness to unique fields to avoid collisions when building a large number of objects.
 

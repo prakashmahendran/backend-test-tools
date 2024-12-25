@@ -1,16 +1,15 @@
-import {randomUUID} from 'crypto';
+import { randomUUID } from 'crypto';
 import {
   FactoryModel,
   FactoryBuildOptions,
   FactoryModelOverride,
   FactoryReturnType,
-  ModelsMap,
+  ModelsMap
 } from './factory.types';
-import {connectionFactoryWorker, userFactoryWorker} from './workers';
+import { userFactoryWorker } from './workers';
 
 const modelsMap: ModelsMap = {
-  connection: connectionFactoryWorker,
-  user: userFactoryWorker,
+  user: userFactoryWorker
 };
 
 export const factory = {
@@ -20,7 +19,7 @@ export const factory = {
   build: function <T extends FactoryModel>(
     name: T,
     attributes: FactoryModelOverride<T> = {},
-    buildOptions: FactoryBuildOptions<T> = {},
+    buildOptions: FactoryBuildOptions<T> = {}
   ): FactoryReturnType<T> {
     if (!Object.keys(modelsMap).includes(name)) throw new Error(`Factory: unknown model "${name}"`);
     const worker = modelsMap[name];
@@ -28,7 +27,7 @@ export const factory = {
     return {
       id: randomUUID(),
       ...instance,
-      ...attributes,
+      ...attributes
     };
   },
 
@@ -39,12 +38,12 @@ export const factory = {
     name: T,
     count: number,
     attributes: FactoryModelOverride<T> = {},
-    buildOptions: FactoryBuildOptions<T> = {},
+    buildOptions: FactoryBuildOptions<T> = {}
   ): Array<FactoryReturnType<T>> {
     const instances: Array<FactoryReturnType<T>> = [];
     for (let i = 0; i < count; i++) {
       instances.push(this.build(name, attributes, buildOptions));
     }
     return instances;
-  },
+  }
 };

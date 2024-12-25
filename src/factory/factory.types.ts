@@ -1,18 +1,9 @@
 import {
-  ConnectionModel,
-  ConnectionBuildOptions,
   UserModel,
   UserBuildOptions,
 } from './workers';
 
 type FactoryTyping = {
-  /** Mapping for the connection model */
-  connection: {
-    /** Options for the connection model */
-    options: ConnectionBuildOptions;
-    /** Return type for the connection model */
-    return: ConnectionModel;
-  };
   /** Mapping for the user model */
   user: {
     /** Options for the user model */
