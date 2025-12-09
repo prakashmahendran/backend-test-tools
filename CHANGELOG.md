@@ -1,3 +1,9 @@
+## [1.1.3](https://github.com/prakashmahendran/backend-test-tools/compare/v1.1.2...v1.1.3) (2025-12-09)
+
+### 👷 CI/CD
+
+* allow semantic-release to push commits by removing persist-credentials: false ([46e8327](https://github.com/prakashmahendran/backend-test-tools/commit/46e832729e43eaae31877edaac2a84719e6446a5))
+
 ## [1.1.2](https://github.com/prakashmahendran/backend-test-tools/compare/v1.1.1...v1.1.2) (2025-12-09)
 
 ### 🐛 Bug Fixes
