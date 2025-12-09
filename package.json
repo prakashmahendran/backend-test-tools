@@ -1,7 +1,7 @@
 {
   "name": "@prakashmahendran/backend-test-tools",
   "version": "1.2.0",
-  "description": "Node test tools",
+  "description": "Backend Node test tools",
   "main": "dist/index.js",
   "scripts": {
     "lint": "eslint ./src",
