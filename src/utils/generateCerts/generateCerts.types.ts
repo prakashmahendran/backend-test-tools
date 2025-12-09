@@ -7,7 +7,7 @@ export interface generateCertsOptions {
   /** Certificate issue information */
   issuer?: Array<pki.CertificateField>;
   /** Private key to use to sign the certificate */
-  key?: pki.PrivateKey;
+  key?: pki.rsa.PrivateKey;
 }
 
 /** Fake certificate generated */
@@ -15,7 +15,7 @@ export interface GeneratedCertificate {
   /** PEM certificate */
   cert: string;
   /** Private key to use with the certificate */
-  privateKey: pki.PrivateKey;
+  privateKey: pki.rsa.PrivateKey;
   /** PEM encoding of the private key */
   privateKeyPem: string;
 }
