@@ -1,3 +1,9 @@
+## [1.1.1](https://github.com/prakashmahendran/backend-test-tools/compare/v1.1.0...v1.1.1) (2025-12-09)
+
+### 🐛 Bug Fixes
+
+* revert to unscoped package name backend-test-tools ([fc94fd0](https://github.com/prakashmahendran/backend-test-tools/commit/fc94fd09df7c464929236e989e1fe17f0f1d0009))
+
 ## [1.1.0](https://github.com/prakashmahendran/backend-test-tools/compare/v1.0.1...v1.1.0) (2025-12-09)
 
 ### ✨ Features
