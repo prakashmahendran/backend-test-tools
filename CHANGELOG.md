@@ -1,3 +1,13 @@
+## [1.1.2](https://github.com/prakashmahendran/backend-test-tools/compare/v1.1.1...v1.1.2) (2025-12-09)
+
+### 🐛 Bug Fixes
+
+* update generateCerts types to use specific pki.rsa.PrivateKey ([26ed6e6](https://github.com/prakashmahendran/backend-test-tools/commit/26ed6e69127cd6e7f4b0036475299b9457c742c5))
+
+### 👷 CI/CD
+
+* update Node.js version to 22 for semantic-release 25.x compatibility ([a3ba4fd](https://github.com/prakashmahendran/backend-test-tools/commit/a3ba4fdd92680c0f24cbf561b50596f992a3cb2d))
+
 ## [1.1.1](https://github.com/prakashmahendran/backend-test-tools/compare/v1.1.0...v1.1.1) (2025-12-09)
 
 ### 🐛 Bug Fixes
