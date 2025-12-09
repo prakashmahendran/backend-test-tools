@@ -1,3 +1,9 @@
+## [1.0.1](https://github.com/prakashmahendran/backend-test-tools/compare/v1.0.0...v1.0.1) (2025-12-09)
+
+### 🐛 Bug Fixes
+
+* update package name to scoped @prakashmahendran/backend-test-tools with public access ([b290250](https://github.com/prakashmahendran/backend-test-tools/commit/b290250300e07a2f576dd0990a024b13ac965d4b))
+
 ## 1.0.0 (2025-12-09)
 
 ### ✨ Features

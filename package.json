@@ -1,6 +1,6 @@
 {
   "name": "@prakashmahendran/backend-test-tools",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Node test tools",
   "main": "dist/index.js",
   "scripts": {
