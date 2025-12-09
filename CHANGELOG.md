@@ -1,3 +1,9 @@
+## [1.2.0](https://github.com/prakashmahendran/backend-test-tools/compare/v1.1.3...v1.2.0) (2025-12-09)
+
+### ✨ Features
+
+* mockrequest ([1004001](https://github.com/prakashmahendran/backend-test-tools/commit/10040016a7f37aaf1e1f3b9d80fef22d81cdc09a))
+
 ## [1.1.3](https://github.com/prakashmahendran/backend-test-tools/compare/v1.1.2...v1.1.3) (2025-12-09)
 
 ### 👷 CI/CD
