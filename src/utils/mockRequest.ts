@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from 'express';
 
 interface MockResponse extends Response {
-  body?: any;
+  body?: unknown;
   headers?: Record<string, string>;
 }
 
@@ -9,7 +9,7 @@ interface MockResponse extends Response {
  * Creates a mock Express Request object for testing
  */
 export function createMockRequest(overrides: Partial<Request> = {}): Request {
-  const req: any = {
+  const req: Partial<Request> = {
     body: {},
     query: {},
     params: {},
@@ -17,9 +17,10 @@ export function createMockRequest(overrides: Partial<Request> = {}): Request {
     method: 'GET',
     url: '/',
     path: '/',
-    get: function (name: string) {
-      return req.headers[name.toLowerCase()];
-    },
+    get: ((name: string) => {
+      const header = (req.headers as Record<string, string | string[]>)?.[name.toLowerCase()];
+      return header;
+    }) as Request['get'],
     ...overrides
   };
 
@@ -30,26 +31,26 @@ export function createMockRequest(overrides: Partial<Request> = {}): Request {
  * Creates a mock Express Response object for testing
  */
 export function createMockResponse(): MockResponse {
-  const res: any = {};
+  const res: Partial<MockResponse> = {};
   res.status = function (code: number) {
-    res.statusCode = code;
-    return res;
+    (res as MockResponse).statusCode = code;
+    return res as MockResponse;
   };
   res.json = function (data: unknown) {
-    res.body = data;
-    return res;
+    (res as MockResponse).body = data;
+    return res as MockResponse;
   };
   res.send = function (data: unknown) {
-    res.body = data;
-    return res;
+    (res as MockResponse).body = data;
+    return res as MockResponse;
   };
   res.setHeader = function (name: string, value: string) {
-    if (!res.headers) res.headers = {};
-    res.headers[name] = value;
-    return res;
+    if (!(res as MockResponse).headers) (res as MockResponse).headers = {};
+    (res as MockResponse).headers![name] = value;
+    return res as MockResponse;
   };
   res.end = function () {
-    return res;
+    return res as MockResponse;
   };
   return res as MockResponse;
 }
