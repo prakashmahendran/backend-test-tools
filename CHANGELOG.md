@@ -1,3 +1,9 @@
+## [1.2.3](https://github.com/prakashmahendran/backend-test-tools/compare/v1.2.2...v1.2.3) (2025-12-10)
+
+### 🐛 Bug Fixes
+
+* es-lint ([d5b4d93](https://github.com/prakashmahendran/backend-test-tools/commit/d5b4d9357139d55672d0a16b636e6b07cd8703b2))
+
 ## [1.2.2](https://github.com/prakashmahendran/backend-test-tools/compare/v1.2.1...v1.2.2) (2025-12-10)
 
 ### 🐛 Bug Fixes
