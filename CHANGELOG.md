@@ -1,3 +1,9 @@
+## [1.2.1](https://github.com/prakashmahendran/backend-test-tools/compare/v1.2.0...v1.2.1) (2025-12-10)
+
+### 🐛 Bug Fixes
+
+* add types ([d95e70e](https://github.com/prakashmahendran/backend-test-tools/commit/d95e70eb0fd2414befad70746f067d5d06fd3e43))
+
 ## [1.2.0](https://github.com/prakashmahendran/backend-test-tools/compare/v1.1.3...v1.2.0) (2025-12-09)
 
 ### ✨ Features
