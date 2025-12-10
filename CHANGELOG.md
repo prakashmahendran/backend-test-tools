@@ -1,3 +1,9 @@
+## [1.2.2](https://github.com/prakashmahendran/backend-test-tools/compare/v1.2.1...v1.2.2) (2025-12-10)
+
+### 🐛 Bug Fixes
+
+* add sharp ([62814ed](https://github.com/prakashmahendran/backend-test-tools/commit/62814ed231165514f2214b2a8f0636d635fcdcfb))
+
 ## [1.2.1](https://github.com/prakashmahendran/backend-test-tools/compare/v1.2.0...v1.2.1) (2025-12-10)
 
 ### 🐛 Bug Fixes
