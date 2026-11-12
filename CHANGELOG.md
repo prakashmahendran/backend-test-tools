@@ -1,3 +1,10 @@
+## [1.2.6](https://github.com/prakashmahendran/backend-test-tools/compare/v1.2.5...v1.2.6) (2026-11-12)
+
+### 🐛 Bug Fixes
+
+* **ci:** regenerate lockfile so npm ci accepts it ([294dd2e](https://github.com/prakashmahendran/backend-test-tools/commit/294dd2e78ae61be7cd5c4b36162d00b44e354f83))
+* **deps:** build against node-server-engine 2.0.2 ([8fef9b9](https://github.com/prakashmahendran/backend-test-tools/commit/8fef9b9973725ac48d68689ac3e3f38c2bd92baa))
+
 ## [1.2.5](https://github.com/prakashmahendran/backend-test-tools/compare/v1.2.4...v1.2.5) (2026-11-12)
 
 ### 🐛 Bug Fixes
