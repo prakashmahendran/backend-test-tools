@@ -1,3 +1,9 @@
+## [1.2.5](https://github.com/prakashmahendran/backend-test-tools/compare/v1.2.4...v1.2.5) (2026-11-12)
+
+### 🐛 Bug Fixes
+
+* **deps:** support node-server-engine 2.x ([7cbf9b1](https://github.com/prakashmahendran/backend-test-tools/commit/7cbf9b1d7bdf1ba5507722db9540ed4187eff3f9))
+
 ## [1.2.4](https://github.com/prakashmahendran/backend-test-tools/compare/v1.2.3...v1.2.4) (2026-11-12)
 
 ### 🐛 Bug Fixes
