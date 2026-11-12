@@ -1,3 +1,14 @@
+## [1.2.4](https://github.com/prakashmahendran/backend-test-tools/compare/v1.2.3...v1.2.4) (2026-11-12)
+
+### 🐛 Bug Fixes
+
+* **ci:** use changelog preset compatible with semantic-release ([ac916dd](https://github.com/prakashmahendran/backend-test-tools/commit/ac916ddc071ab83e90c619f7b842b27ca7e5f45d))
+* **deps:** patch vulnerable dependencies and make engine peer optional ([91f4d5b](https://github.com/prakashmahendran/backend-test-tools/commit/91f4d5bfad66dc343e0e2b200e05e895d6b83c85))
+
+### 📚 Documentation
+
+* add CLAUDE.md with package overview and conventions ([e75a233](https://github.com/prakashmahendran/backend-test-tools/commit/e75a233c5cac6aa6d8290c85fe04f0f5f9d60fa8))
+
 ## [1.2.3](https://github.com/prakashmahendran/backend-test-tools/compare/v1.2.2...v1.2.3) (2025-12-10)
 
 ### 🐛 Bug Fixes
