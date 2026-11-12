@@ -26,6 +26,11 @@ Tools to be used by the Node backend services for testing purpose.
     - [Json Web token](#json-web-token)
       - [Bearer token](#bearer-token)
       - [Token authenticated request](#token-authenticated-request)
+    - [Live tests](#live-tests)
+      - [Start a built service](#start-a-built-service)
+      - [API client](#api-client)
+      - [Eventually](#eventually)
+      - [Client assertion (private_key_jwt)](#client-assertion-private_key_jwt)
 
 ## Generators
 
@@ -235,3 +240,58 @@ jwtRequest(app, user)
  .get('/test')
  .expect(200);
 ```
+
+### Live tests
+
+Helpers for end-to-end tests that run a **built** service as its own process against a real database, so
+the test goes through the real HTTP stack, authentication and migrations.
+
+#### Start a built service
+
+```javascript
+import {startLiveService} from 'backend-test-tools'
+const service = await startLiveService({
+  cwd: path.resolve(__dirname, '../..'),        // the service directory (with dist/)
+  port: 18090,
+  env: {NODE_ENV: 'development', RUN_DB_MIGRATION: 'true', SQL_DB: 'my_service_test'},
+  healthPath: '/healthz'                        // default: /heartbeat (engine health check)
+});
+// service.url, service.logs(), await service.stop()
+```
+
+It runs `node -r ./dist/env/config.js ./dist/index.js` (the template's start command) and resolves once the
+health path answers 2xx; it rejects with the service output if the process exits or times out.
+
+#### API client
+
+```javascript
+import {createApiClient} from 'backend-test-tools'
+const api = createApiClient(service.url);
+const res = await api('POST', '/v1/auth/login', {body: {email}, token, headers});
+// res.status, res.body (parsed JSON or text), res.text, res.headers
+```
+
+#### Eventually
+
+Retry an assertion until it passes, for state the service settles in the background (queues, workers):
+
+```javascript
+import {eventually} from 'backend-test-tools'
+const res = await eventually(async () => {
+  const r = await api('GET', '/v1/me/today', {token});
+  expect(r.body.totals.breakSec).to.equal(600);
+  return r;
+}, 10000);
+```
+
+#### Client assertion (private_key_jwt)
+
+A P-256 key pair for a client (e.g. a device) and an ES256 client assertion (RFC 7523) signed with it:
+
+```javascript
+import {generateClientKeyPair, generateClientAssertion} from 'backend-test-tools'
+const {privateKey, publicJwk} = generateClientKeyPair();          // register publicJwk with the service
+const assertion = generateClientAssertion({clientId: deviceId, audience: 'my:device-token', privateKey});
+// clockOffsetSec: -3600 simulates a client clock an hour behind
+```
+

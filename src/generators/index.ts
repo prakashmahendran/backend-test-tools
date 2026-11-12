@@ -5,3 +5,4 @@ export * from './generateLocale';
 export * from './generateRsaKeyPair';
 export * from './generateUserCrypto';
 export * from './generateEcdsaKeyPair';
+export * from './generateClientAssertion';
