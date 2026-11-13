@@ -1,3 +1,9 @@
+## [1.3.0](https://github.com/prakashmahendran/backend-test-tools/compare/v1.2.6...v1.3.0) (2026-11-13)
+
+### ✨ Features
+
+* live test helpers (start a built service, API client, eventually, client assertions) ([98c45bb](https://github.com/prakashmahendran/backend-test-tools/commit/98c45bb49d929bec4a2a053ce426ddcee9ad1479))
+
 ## [1.2.6](https://github.com/prakashmahendran/backend-test-tools/compare/v1.2.5...v1.2.6) (2026-11-12)
 
 ### 🐛 Bug Fixes
