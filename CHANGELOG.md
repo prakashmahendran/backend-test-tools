@@ -1,3 +1,9 @@
+## [1.3.1](https://github.com/prakashmahendran/backend-test-tools/compare/v1.3.0...v1.3.1) (2026-11-13)
+
+### 🐛 Bug Fixes
+
+* **deps:** @faker-js/faker is a runtime dependency ([29c9c35](https://github.com/prakashmahendran/backend-test-tools/commit/29c9c359cada2f70aaa7f9599f8a2deedcb48318))
+
 ## [1.3.0](https://github.com/prakashmahendran/backend-test-tools/compare/v1.2.6...v1.3.0) (2026-11-13)
 
 ### ✨ Features
