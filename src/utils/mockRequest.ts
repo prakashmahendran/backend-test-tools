@@ -1,8 +1,19 @@
 import { Request, Response, NextFunction } from 'express';
+import sinon, { SinonStub } from 'sinon';
 
-interface MockResponse extends Response {
+/** A mock Express response: every method is a sinon stub, and what the handler sent is recorded */
+export interface MockResponse extends Response {
+  /** Last body passed to json() or send() */
   body?: unknown;
+  /** Headers set with setHeader() or set() */
   headers?: Record<string, string>;
+  status: Response['status'] & SinonStub;
+  json: Response['json'] & SinonStub;
+  send: Response['send'] & SinonStub;
+  sendStatus: Response['sendStatus'] & SinonStub;
+  setHeader: Response['setHeader'] & SinonStub;
+  set: Response['set'] & SinonStub;
+  end: Response['end'] & SinonStub;
 }
 
 /**
@@ -28,41 +39,54 @@ export function createMockRequest(overrides: Partial<Request> = {}): Request {
 }
 
 /**
- * Creates a mock Express Response object for testing
+ * Creates a mock Express Response object for testing.
+ * Each method is a sinon stub (`expect(res.status).to.have.been.calledWith(404)`) that also records what was
+ * sent: `res.statusCode` (200 until status() or sendStatus() is called), `res.body`, `res.headers`.
  */
 export function createMockResponse(): MockResponse {
-  const res: Partial<MockResponse> = {};
-  res.status = function (code: number) {
-    (res as MockResponse).statusCode = code;
-    return res as MockResponse;
+  const res = { statusCode: 200, headersSent: false } as MockResponse;
+  const chain = <A extends Array<never>>(record: (...args: A) => void): SinonStub =>
+    sinon.stub().callsFake((...args: A) => {
+      record(...args);
+      return res;
+    });
+  const setHeader = (name: string, value: string): void => {
+    res.headers = { ...res.headers, [name]: value };
   };
-  res.json = function (data: unknown) {
-    (res as MockResponse).body = data;
-    return res as MockResponse;
-  };
-  res.send = function (data: unknown) {
-    (res as MockResponse).body = data;
-    return res as MockResponse;
-  };
-  res.setHeader = function (name: string, value: string) {
-    if (!(res as MockResponse).headers) (res as MockResponse).headers = {};
-    (res as MockResponse).headers![name] = value;
-    return res as MockResponse;
-  };
-  res.end = function () {
-    return res as MockResponse;
-  };
-  return res as MockResponse;
+  res.status = chain((code: number) => {
+    res.statusCode = code;
+  }) as MockResponse['status'];
+  res.sendStatus = chain((code: number) => {
+    res.statusCode = code;
+    res.headersSent = true;
+  }) as MockResponse['sendStatus'];
+  res.json = chain((data: unknown) => {
+    res.body = data;
+    res.headersSent = true;
+  }) as MockResponse['json'];
+  res.send = chain((data: unknown) => {
+    res.body = data;
+    res.headersSent = true;
+  }) as MockResponse['send'];
+  res.setHeader = chain(setHeader) as MockResponse['setHeader'];
+  res.set = chain((field: string | Record<string, string>, value?: string) => {
+    if (typeof field === 'string') setHeader(field, value as string);
+    else Object.entries(field).forEach(([k, v]) => setHeader(k, v));
+  }) as MockResponse['set'];
+  res.end = chain(() => {
+    res.headersSent = true;
+  }) as MockResponse['end'];
+  return res;
 }
 
 /**
  * Creates a mock Express NextFunction for testing
  */
-export function createMockNext(): NextFunction {
+export function createMockNext(): NextFunction & { called: boolean; error?: unknown } {
   const next = function (error?: unknown) {
     next.called = true;
     next.error = error;
-  } as NextFunction & { called?: boolean; error?: unknown };
+  } as NextFunction & { called: boolean; error?: unknown };
   next.called = false;
   return next;
 }

@@ -20,6 +20,9 @@ Tools to be used by the Node backend services for testing purpose.
     - [Models](#models)
       - [User](#user)
   - [Utilities](#utilities)
+    - [Test server](#test-server)
+    - [Express mocks](#express-mocks)
+    - [Model mocks](#model-mocks)
     - [TLS](#tls)
       - [Certificate generation](#certificate-generation)
       - [Secured request](#secured-request)
@@ -186,6 +189,58 @@ const model = factory.build('user', undefined, buildOptions)
 
 Utility functions that bring some convenience when writing tests.
 
+### Test server
+
+The usual mocha hooks of a node-server-engine service, in one call: create the server and `init()` it before
+the tests, restore `process.env` before each test, `sinon.restore()` after each test, `shutdown()` after the
+tests. Use it in the root hook file (`test/hooks.ts`), or inside a `describe()` for one suite.
+
+```typescript
+import {useTestServer} from 'backend-test-tools'
+import {sequelize} from 'node-server-engine'
+import {createServer} from 'app/createServer'
+
+export const testServer = useTestServer(createServer, {
+  afterInit: async () => {                 // once, after server.init()
+    await sequelize.sync();
+  }
+  // beforeShutdown, restoreEnv: false, restoreSinon: false
+});
+
+// in a test
+await request(testServer.app).get('/users').expect(200);
+```
+
+`testServer.server` and `testServer.app` throw if read before the `before` hook ran (e.g. at module load).
+
+### Express mocks
+
+For handler and middleware unit tests without HTTP:
+
+```typescript
+import {createMockRequest, createMockResponse, createMockNext} from 'backend-test-tools'
+const req = createMockRequest({params: {id: '1'}, user: {id: 'u1'}});
+const res = createMockResponse();
+const next = createMockNext();
+await getUserHandler(req, res, next);
+expect(res.status).to.have.been.calledWith(404);   // every response method is a sinon stub
+expect(res.statusCode).to.equal(404);              // ...and what was sent is recorded
+expect(res.body).to.deep.equal({message: 'User not found'});
+// res.headers (setHeader/set), res.headersSent; next.called, next.error
+```
+
+### Model mocks
+
+```typescript
+import {createMockModelInstance, stubModelMethods} from 'backend-test-tools'
+const user = createMockModelInstance({id: 1, name: 'Ann'});   // save/update/destroy/reload/set/get/toJSON stubs
+stubModelMethods(User, {findByPk: user, count: 1});           // only these static methods; sinon.restore() undoes them
+await updateUserHandler(req, res);
+expect(user.update).to.have.been.calledWith({name: 'Bea'});
+```
+
+`set()` and `update()` change the instance's data; `toJSON()` and `get()` return it.
+
 ### TLS
 
 #### Certificate generation
@@ -259,8 +314,14 @@ const service = await startLiveService({
 // service.url, service.logs(), await service.stop()
 ```
 
-It runs `node -r ./dist/env/config.js ./dist/index.js` (the template's start command) and resolves once the
-health path answers 2xx; it rejects with the service output if the process exits or times out.
+It runs `node -r ./dist/env/config.js ./dist/index.js` (the template's start command) with the Node.js that runs
+the tests, and resolves once the health path answers 2xx; it rejects with the service output if the process
+exits or times out.
+
+`stop()` sends SIGTERM and waits until the service has exited (its shutdown callbacks ran), and only sends
+SIGKILL after `stopTimeoutMs` (default 15 s). Because the service exits normally, code coverage of the service
+process is recorded too: run the live suite under nyc (it follows child processes) and report it together with
+the unit tests.
 
 #### API client
 

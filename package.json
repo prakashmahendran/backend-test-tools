@@ -7,7 +7,7 @@
   "scripts": {
     "lint": "eslint ./src",
     "lint:fix": "eslint ./src --fix",
-    "test": "NODE_ENV=test nyc --reporter=none mocha test/hooks.ts \"src/**/*.test.ts\"",
+    "test": "NODE_ENV=test nyc --reporter=text-summary mocha --reporter spec \"src/**/*.test.ts\"",
     "build": "rimraf dist && tsc -p tsconfig.build.json && tsc-alias -p tsconfig.build.json && npx babel src --out-dir dist --source-maps --extensions \".ts\" --ignore \"**/*.test.ts\" --copy-files --no-copy-ignored",
     "prepublishOnly": "npm run build"
   },
