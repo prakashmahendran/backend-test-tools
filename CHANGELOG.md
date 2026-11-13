@@ -1,3 +1,9 @@
+## [1.4.0](https://github.com/prakashmahendran/backend-test-tools/compare/v1.3.1...v1.4.0) (2026-11-13)
+
+### ✨ Features
+
+* useTestServer, sinon-backed Express mocks, model mocks; graceful live service stop ([5d4a69c](https://github.com/prakashmahendran/backend-test-tools/commit/5d4a69cb06d57345961e2585f42fcd6e4e7c98e4))
+
 ## [1.3.1](https://github.com/prakashmahendran/backend-test-tools/compare/v1.3.0...v1.3.1) (2026-11-13)
 
 ### 🐛 Bug Fixes
