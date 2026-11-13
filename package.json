@@ -32,7 +32,6 @@
     "@commitlint/cli": "^21.2.4",
     "@commitlint/config-conventional": "^21.2.4",
     "@eslint/js": "^9.17.0",
-    "@faker-js/faker": "^10.6.0",
     "@semantic-release/changelog": "^7.0.0",
     "@semantic-release/git": "^11.0.1",
     "@types/chai": "^5.0.1",
@@ -81,6 +80,7 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.29.14",
+    "@faker-js/faker": "^10.6.0",
     "jsonwebtoken": "^9.0.3",
     "node-forge": "^1.4.3",
     "sharp": "^0.35.5",
